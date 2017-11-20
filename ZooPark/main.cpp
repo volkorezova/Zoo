@@ -61,6 +61,7 @@ void Zoo::addNewAnimal() {
     string name;
     int pawsNum;
     int isShow;
+    
     //find free element
     for (i = 0 ; animals[i] != nullptr ; i++);
     
@@ -198,6 +199,10 @@ public:
 
 void ZooManager::showUserMenu() {
     int userChoice;
+    string shown_name;
+    string edit_name;
+    string deleted_name;
+    
     cout<<"Welcome to zoo. Pls choose what do you want to do?"<<endl;
     for (;;){
         cout<<"Press 1 - to ADD new animal\nPress 2 - to DELETE animal\nPress 3 - to SHOW info about ALL animals\nPress 4 - to SHOW info about SELECTED animal\nPress 5 - to EDIT info of SELECTED animal\nPress 6 - to EXIT."<<endl;
@@ -211,9 +216,7 @@ void ZooManager::showUserMenu() {
             }
             case 2:{
                 cout << "You will delete animal from zoo\n  ENTER NAME OF ANIMAL which you want to DELETE: ";
-                char* deleted_name = new char[20];
-                cin >> deleted_name;
-                fpurge(stdin);
+                getline(cin, deleted_name);;
                 zoo.deleteAnimal(deleted_name);
                 break;
             }
@@ -224,16 +227,14 @@ void ZooManager::showUserMenu() {
             }
             case 4:{
                 cout<<"You will receive info about selected animal\n  ENTER NAME OF ANIMAL which you want to SEE"<<endl;
-                char* shown_name = new char[20];
-                cin >> shown_name;
+                getline(cin, shown_name);
                 zoo.showAboutInfo(shown_name);
                 break;
             }
                 
             case 5:{
                 cout<<"You will EDIT info about some animal from zoo\n  ENTER NAME OF ANIMAL which you want to EDIT"<<endl;
-                char* edit_name = new char[20];
-                cin >> edit_name;
+                getline(cin, edit_name);
                 zoo.editAnimalInfo(edit_name);
                 break;
             }
