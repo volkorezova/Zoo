@@ -18,9 +18,6 @@ public:
 
 void ZooManager::showUserMenu() {
     int userChoice;
-    string shown_name;
-    string edit_name;
-    string deleted_name;
     
     cout<<"Welcome to zoo. Pls choose what do you want to do?"<<endl;
     for (;;){
@@ -35,7 +32,8 @@ void ZooManager::showUserMenu() {
             }
             case 2:{
                 cout << "You will delete animal from zoo\n  ENTER NAME OF ANIMAL which you want to DELETE: ";
-                getline(cin, deleted_name);;
+                char* deleted_name = new char[20];
+                cin>>deleted_name;
                 zoo.deleteAnimal(deleted_name);
                 break;
             }
@@ -46,14 +44,16 @@ void ZooManager::showUserMenu() {
             }
             case 4:{
                 cout<<"You will receive info about selected animal\n  ENTER NAME OF ANIMAL which you want to SEE"<<endl;
-                getline(cin, shown_name);
+                char* shown_name = new char[20];
+                cin>>shown_name;
                 zoo.showAboutInfo(shown_name);
                 break;
             }
                 
             case 5:{
                 cout<<"You will EDIT info about some animal from zoo\n  ENTER NAME OF ANIMAL which you want to EDIT"<<endl;
-                getline(cin, edit_name);
+                char* edit_name = new char[20];
+                cin>>edit_name;
                 zoo.editAnimalInfo(edit_name);
                 break;
             }

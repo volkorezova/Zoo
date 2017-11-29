@@ -13,29 +13,29 @@
 class Zoo {
 private:
     Animal* animals[NUMBER_OF_ANIMALS];
+    int counterAnimal;
 public:
-    Zoo() {};
+    Zoo() {counterAnimal = 0;};
     ~Zoo() { for (int i=0; i<NUMBER_OF_ANIMALS; i++) delete animals[i]; }
     void addNewAnimal();//adding new animal to zoo
     void showPopulation(); //to show all info about all animal
-    void deleteAnimal(string deleted_name); //delete animal using name
-    void showAboutInfo(string shown_name);//to show info about selected animal using name
-    void editAnimalInfo(string edit_name);//edit info for selected
+    void deleteAnimal(char* deleted_name); //delete animal using name
+    void showAboutInfo(char* shown_name);//to show info about selected animal using name
+    void editAnimalInfo(char* edit_name);//edit info for selected
 };
 
 //adding new animal to zoo
 void Zoo::addNewAnimal() {
     int i;
     int age;
-    string kind;
-    string name;
+    int counterAnimal;
     int pawsNum;
     int isShow;
     
     //find free element
-    for (i = 0 ; animals[i] != nullptr ; i++);
+    for (int i = 0 ; animals[i] != nullptr ; i++);
     
-    if (i > 100)
+    if (i > NUMBER_OF_ANIMALS)
     {
         cout<<">>>>Animal was not sussecfully added to zoo ( No space )<<<<\n"<<std::endl;
         return;
@@ -47,12 +47,13 @@ void Zoo::addNewAnimal() {
     animals[i]->setAge(age);
     
     cout << "Enter kind: ";
-    getline(cin, kind);
-    getline(cin, kind);
+    char* kind = new char[20];
+    cin >> kind;
     animals[i]->setKind(kind);
     
     cout << "Enter name: ";
-    getline(cin, name);
+    char* name = new char[20];
+    cin>>name;
     animals[i]->setName(name);
     
     cout << "Enter number of paws: ";
@@ -67,12 +68,13 @@ void Zoo::addNewAnimal() {
     animals[i]->setIsShow(isShow);
     
     cout<<">>>>Animal was sussecfully added to zoo<<<<\n"<<std::endl;
+    counterAnimal++;
 };
 
 //to show all info about animal
 void Zoo::showPopulation() {
     bool res = false;
-    for (int i = 0 ; i < NUMBER_OF_ANIMALS ; i++)
+    for (int i = 0 ; i < counterAnimal; i++)
         if (animals[i] != nullptr){
             cout << "Age: "<< animals[i]->getAge();
             cout << "; Kind: "<< animals[i]->getKind();
@@ -88,9 +90,9 @@ void Zoo::showPopulation() {
 };
 
 //delete animal using name of animal
-void Zoo::deleteAnimal(string deleted_name) {
+void Zoo::deleteAnimal(char* deleted_name) {
     bool res = false;
-    for (int i = 0 ; i < NUMBER_OF_ANIMALS ; i++)
+    for (int i = 0 ; i < counterAnimal ; i++)
         if (animals[i] != nullptr)
             if (animals[i]->getName().compare(deleted_name) == 0)  {
                 delete animals[i];
@@ -100,12 +102,13 @@ void Zoo::deleteAnimal(string deleted_name) {
             }
     if (res == false)
         cout << "Not found...\n\n";
+    delete[] deleted_name;
 };
 
 //show info about selected animal
-void Zoo::showAboutInfo(string shown_name){
+void Zoo::showAboutInfo(char* shown_name){
     bool res = false;
-    for (int i = 0 ; i < NUMBER_OF_ANIMALS ; i++)
+    for (int i = 0 ; i < counterAnimal ; i++)
         if (animals[i] != nullptr)
         {
             if (animals[i]->getName().compare(shown_name) == 0) {
@@ -121,10 +124,11 @@ void Zoo::showAboutInfo(string shown_name){
         }
     if (res == false)
         cout << "Not found...\n\n";
+    delete[] shown_name;
 };
 
 //edit info about selected animal
-void Zoo::editAnimalInfo(string edit_name){
+void Zoo::editAnimalInfo(char* edit_name){
     bool res = false;
     int age;
     string kind;
@@ -132,7 +136,7 @@ void Zoo::editAnimalInfo(string edit_name){
     int pawsNum;
     int isShow;
     
-    for (int i = 0 ; i < NUMBER_OF_ANIMALS ; i++)
+    for (int i = 0 ; i < counterAnimal ; i++)
         if (animals[i] != nullptr)
             if (animals[i]->getName().compare(edit_name) == 0) {
                 cout << "Enter new age: ";
@@ -140,12 +144,13 @@ void Zoo::editAnimalInfo(string edit_name){
                 animals[i]->setAge(age);
                 
                 cout << "Enter kind: ";
-                getline(cin, kind);
-                getline(cin, kind);
+                char* kind = new char[20];
+                cin>> kind;
                 animals[i]->setKind(kind);
                 
                 cout << "Enter name: ";
-                getline(cin, name);
+                char* name = new char[20];
+                cin>> name;
                 animals[i]->setName(name);
                 
                 cout << "Enter number of paws: ";
@@ -159,6 +164,7 @@ void Zoo::editAnimalInfo(string edit_name){
             }
     if (res == false)
         cout << "Not found...\n\n";
+    delete[] edit_name;
 };
 
 #endif /* Zoo_h */

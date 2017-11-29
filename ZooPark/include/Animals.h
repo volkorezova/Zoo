@@ -14,8 +14,8 @@ using namespace std;
 class Animal {
 private:
     int age;
-    string kind;
-    string name;
+    char* kind;
+    char* name;
     int pawsNum;
     int health;
     int isShow;
@@ -26,10 +26,10 @@ public:
     void setAge(int age) { this->age = age; }
     int getAge() { return age; }
     
-    void setName(string name){this->name = name;}
+    void setName(char* nameOfAnimal){name = nameOfAnimal;}
     string getName(){return name;}
     
-    void setKind(string kind){this->kind = kind;}
+    void setKind(char* kindType){kind = kindType;}
     string getKind(){return kind;}
     
     void setPawsNum(int pawsNum){this->pawsNum = pawsNum;}
